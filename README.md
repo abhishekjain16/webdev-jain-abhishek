@@ -1,4 +1,24 @@
-# AngularFourMEANSeed
+# Webdev Jain Abhishek
+
+## About Me
+My name is Abhishek Jain. Currently, I am pursuing Masters of Science in Comouter Science at Northeastern University.
+Previously, I have worked on many Web applications which were built on Ruby on Rails.
+
+This repository is for the purpose of Web Development course at Northeastern University and is for maintained for learning purposes.
+
+## Production
+
+This Application is live on Heroku at - https://jain-abhishek-webdev.herokuapp.com/
+
+## Assignments
+
+Coming soon
+
+## Project
+
+Coming soon
+
+## Installation
 
 After you clone this repository and run "npm install"
 To start the project
@@ -11,8 +31,6 @@ Open two terminals, One to start the front end, One to start the backend
 
 Front end will run on `http://localhost:4200/`
 Server will run on port 3100. Specified in server.js and in environment.ts files
-
-
 
 
 
