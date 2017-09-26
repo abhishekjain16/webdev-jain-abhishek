@@ -2,37 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
+  <meta name="viewport" content="initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../../css/main.css" />
-  <script type="application/javascript" src="../../vendors/bootstrap/dist/js/bootstrap.min.js"> </script>
   <title>Website List</title>
 </head>
 <body>
+<header>
+  <a href="../user/profile.html" class="white"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  Websites
+  <a href="website-new.html" class="white"><span class="pull-right glyphicon glyphicon-plus"></span></a>
+</header>
 <div class="container-fluid">
   <ul class="list-group">
     <li class="list-group-item active">
-      Name
+      <div class="row">
+        <div class="col-xs-9 col-sm-6 col-md-3">
+          Name
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+          Date
+        </div>
+        <div class="col-sm-3 col-md-3 hidden-xs">
+          Owner
+        </div>
+        <div class="col-xs-3">
+        </div>
+      </div>
     </li>
     <li class="list-group-item">
-      Wikipedia
-      <a class="pull-right" href="webiste-edit.html">
-        <span class="glyphicon glyphicon-edit"/>
-      </a>
+      <div class="row">
+        <div class="col-xs-9 col-sm-6 col-md-3">
+          <a href="../page/page-list.html">Wikipedia</a>
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+          06/06/2017
+        </div>
+        <div class="col-sm-3 col-md-3 hidden-xs">
+          Abhishek
+        </div>
+        <div class="col-xs-3">
+          <a class="pull-right" href="website-edit.html">
+            <span class="glyphicon glyphicon-edit"/>
+          </a>
+        </div>
+      </div>
     </li>
     <li class="list-group-item">
-      Facebook
-      <a class="pull-right" href="webiste-edit.html">
-        <span class="glyphicon glyphicon-edit"/>
-      </a>
+      <div class="row">
+        <div class="col-xs-9 col-sm-6 col-md-3">
+          <a href="../page/page-list.html">Facebook</a>
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+          08/02/2007
+        </div>
+        <div class="col-sm-3 col-md-3 hidden-xs">
+          Mark
+        </div>
+        <div class="col-xs-3">
+          <a class="pull-right" href="website-edit.html">
+            <span class="glyphicon glyphicon-edit"/>
+          </a>
+        </div>
+      </div>
     </li>
     <li class="list-group-item">
-      Twitter
-      <a class="pull-right" href="webiste-edit.html">
-        <span class="glyphicon glyphicon-edit"/>
-      </a>
+      <div class="row">
+        <div class="col-xs-9 col-sm-6 col-md-3">
+          <a href="../page/page-list.html">Twitter</a>
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+          06/06/2007
+        </div>
+        <div class="col-sm-3 col-md-3 hidden-xs">
+          John
+        </div>
+        <div class="col-xs-3">
+          <a class="pull-right" href="website-edit.html">
+            <span class="glyphicon glyphicon-edit"/>
+          </a>
+        </div>
+      </div>
     </li>
   </ul>
 </div>
+<footer>
+  <a href="../user/profile.html"
+     class="white">
+    <span class="glyphicon glyphicon-user pull-right"></span>
+  </a>
+</footer>
 </body>
 </html>
