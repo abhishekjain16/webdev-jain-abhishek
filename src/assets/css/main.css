@@ -42,7 +42,7 @@ footer {
   bottom: 0;
   left: 0;
   margin-top: 2%;
-  /*position: fixed;*/
+  position: fixed;
   padding: 1em 1em;
 }
 
@@ -53,6 +53,10 @@ footer {
 
 .aj-widget {
   padding: 1px;
+}
+
+.container-fluid {
+  padding-bottom: 50px;
 }
 
 .aj-widget .widget-settings {
