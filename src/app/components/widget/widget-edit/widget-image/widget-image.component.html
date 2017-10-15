@@ -1,67 +1,55 @@
+
 <header>
-  <a href="../page/page-list.html" class="white"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']"
+     class="white">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
   Edit Widget
-  <a href="widget-edit.html" class="white"><span class="pull-right glyphicon glyphicon-check"></span></a>
+  <a (click)="update()"
+     [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']"
+     class="pull-right white">
+    <span class="pull-right glyphicon glyphicon-check"></span>
+  </a>
 </header>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-      <label class="label"
-             for="name">
-        Name
-      </label>
-      <input type="text"
-             id="name"
-             class="form-control"
-             value="Image Name"
-             placeholder="Name" />
-      <label class="label"
-             for="text">
-        Text
-      </label>
-      <input type="text"
-             id="text"
-             class="form-control"
-             value="This is about widget text"
-             placeholder="text" />
-      <label class="label"
-             for="url">
+  <form>
+    <div class="form-group">
+      <label for="url">
         URL
       </label>
-      <input type="text"
-             id="url"
+      <input [(ngModel)]="url"
+             name="url"
+             required
+             type="url"
+             required
              class="form-control"
-             value="http://www.images.com/tiger.jpeg"
-             placeholder="url" />
-      <label class="label"
-             for="width">
+             id="url"
+             placeholder="http://image.com/image.jpeg">
+    </div>
+    <div class="form-group">
+      <label for="width">
         Width
       </label>
-      <input type="text"
+      <input [(ngModel)]="width"
+             name="width"
+             required
+             type="text"
+             required
+             class="form-control"
              id="width"
-             class="form-control"
-             value="100%"
-             placeholder="width" />
-      <label class="label"
-             for="image">
-        Upload
-      </label>
-      <input type="file"
-             id="image"
-             class="form-control"
-             placeholder="width" />
-      <input type="submit"
-             value="Upload Image"
-             class="btn btn-block btn-primary">
-      <a href="widget-list.html"
-         class="btn btn-danger btn-block">
+             placeholder="100%">
+    </div>
+    <div class="form-group">
+      <a (click)="delete()"
+         class="btn btn-danger btn-block "
+         [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']">
         Delete
       </a>
     </div>
-  </div>
+  </form>
 </div>
 <footer>
-  <a href="../user/profile.html"
+  <a [routerLink]="['/user', userId]"
      class="white">
     <span class="glyphicon glyphicon-user pull-right"></span>
   </a>

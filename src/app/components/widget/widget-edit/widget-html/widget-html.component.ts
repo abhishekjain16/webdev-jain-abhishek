@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-widget-image',
-  templateUrl: './widget-image.component.html',
-  styleUrls: ['./widget-image.component.css']
+  selector: 'app-widget-html',
+  templateUrl: './widget-html.component.html',
+  styleUrls: ['./widget-html.component.css']
 })
-export class WidgetImageComponent implements OnInit {
+export class WidgetHtmlComponent implements OnInit {
 
-  url: string;
-  width: string;
+  text: string;
   userId: string;
   wid: string;
   pid: string;
@@ -28,20 +27,17 @@ export class WidgetImageComponent implements OnInit {
       this.pid = params['pid'];
       this.wgid = params['wgid'];
       this.widget = this.widgetService.findWidgetById(this.wgid);
-      this.width = this.widget['width'];
-      this.url = this.widget['url'];
+      this.text = this.widget['text'];
     });
   }
 
   update() {
-    this.widget['widgetType'] = 'IMAGE';
-    this.widget['width'] = this.width;
-    this.widget['url'] = this.url;
+    this.widget['widgetType'] = 'HTML';
+    this.widget['text'] = this.text;
     this.widgetService.updateWidget(this.wgid, this.widget);
   }
 
   delete() {
     this.widgetService.deleteWidget(this.wgid);
   }
-
 }

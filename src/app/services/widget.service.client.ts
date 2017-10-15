@@ -20,7 +20,7 @@ export class WidgetService {
     { '_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
     { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
     { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100%',
-      'url': 'https://youtu.be/AM2Ivdi9c4E' },
+      'url': 'https://www.youtube.com/embed/AM2Ivdi9c4E' },
     { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}
   ];
 
@@ -36,7 +36,7 @@ export class WidgetService {
   };
 
   createWidget(pageId: string, widget: any) {
-    widget._id = Math.random();
+    widget._id = Math.floor(Math.random() * 10000).toString();
     widget.pageId = pageId;
     this.widgets.push(widget);
     return widget;
@@ -55,9 +55,11 @@ export class WidgetService {
   }
 
   findWidgetsByPageId(pageId: string) {
+    const results = [];
     for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x].pageId === pageId) {  return this.widgets[x]; }
+      if (this.widgets[x].pageId === pageId) {  results.push(this.widgets[x]); }
     }
+    return results;
   }
 
   updateWidget(widgetId: string, widget: any) {

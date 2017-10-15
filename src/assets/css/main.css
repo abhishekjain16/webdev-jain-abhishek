@@ -69,7 +69,7 @@ footer {
 }
 
 .aj-widget .widget-settings {
-  position: fixed;
+  position: absolute;
   right: 2px;
   background-color: #fff;
   border-bottom-left-radius: 5px;

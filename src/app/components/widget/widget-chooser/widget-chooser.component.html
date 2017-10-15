@@ -1,61 +1,64 @@
 <header>
-  <a href="../page/page-list.html" class="white"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a [routerLink]="['/user', userId, 'website', wid, 'page']"
+     class="white">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
   Choose Widget
 </header>
 <ul class="list-group">
   <li class="list-group-item">
-    <a href="widget-heading.html">
+    <a (click)="create('HEADING')">
       Header
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-label.html">
+    <a href="javascript:">
       Label
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-html.html">
+    <a (click)="create('HTML')">
       Html
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-input.html">
+    <a href="javascript:">
       Text Input
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-link.html">
+    <a href="javascript:">
       Link
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-button.html">
+    <a href="javascript:l">
       Button
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-image.html">
+    <a (click)="create('IMAGE')">
       Image
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-youtube.html">
+    <a (click)="create('YOUTUBE')">
       Youtube
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-table.html">
+    <a href="javascript:">
       Data Table
     </a>
   </li>
   <li class="list-group-item">
-    <a href="widget-repeater.html">
+    <a href="javascript:">
       Repeater
     </a>
   </li>
 </ul>
 <footer>
-  <a href="../user/profile.html"
+  <a [routerLink]="['/user', userId]"
      class="white">
     <span class="glyphicon glyphicon-user pull-right"></span>
   </a>
