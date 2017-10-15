@@ -1,26 +1,46 @@
+<form (ngSubmit) = "update()" #f="ngForm">
 <header>
   Profile
-  <a href="profile.html" class="white"><span class="pull-right glyphicon glyphicon-check"></span></a>
+  <button type="submit"
+          class="pull-right white btn"
+          [disabled]="!f.valid"><span class="pull-right glyphicon glyphicon-check"></span></button>
 </header>
 <div class="container-fluid profile clearfix">
   <label for="username" class="label">Username</label>
-  <input type="text" id="username" value="abhishekjain" class="form-control" />
+  <input type="text"
+         id="username"
+         name="username"
+         [(ngModel)]="username"
+         class="form-control" />
 
   <label for="email" class="label">Email</label>
-  <input type="email" id="email" value="abhishek@gmail.com" class="form-control" />
+  <input type="email"
+         id="email"
+         name="email"
+         [(ngModel)]="email"
+         class="form-control" />
 
   <label for="first_name" class="label">First Name</label>
-  <input type="text" id="first_name" value="Abhishek" class="form-control" />
+  <input type="text"
+         id="first_name"
+         name="first_name"
+         [(ngModel)]="first_name"
+         class="form-control" />
 
   <label for="last_name" class="label">Last Name</label>
-  <input type="text" id="last_name" value="Jain" class="form-control" />
+  <input type="text"
+         id="last_name"
+         name="last_name"
+         [(ngModel)]="last_name"
+         class="form-control" />
 
-  <a href="../website/website-list.html" class="btn btn-primary btn-block">Websites</a>
+  <a [routerLink]="['/user', userId, 'website']" class="btn btn-primary btn-block">Websites</a>
 
-  <a href="login.html" class="btn btn-danger btn-block">Logout</a>
+  <a [routerLink]= "['/login']" class="btn btn-danger btn-block">Logout</a>
 </div>
+</form>
 <footer>
-  <a href="profile.html"
+  <a [routerLink]= "['/profile']"
      class="white">
     <span class="glyphicon glyphicon-user pull-right"></span>
   </a>

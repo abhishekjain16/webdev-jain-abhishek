@@ -1,4 +1,4 @@
-input, textarea {
+input, textarea, button {
   margin-bottom: 0.75em;
 }
 
@@ -25,6 +25,15 @@ a.white {
 
 a.white:hover {
   color: #fff;
+}
+
+button.white {
+  color: #ffffff;
+}
+
+button.white {
+  color: #fff;
+  background-color: #337ab7;
 }
 
 header {

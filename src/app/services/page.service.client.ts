@@ -48,17 +48,19 @@ export class PageService {
   }
 
   findPageByWebsiteId(websiteId: string) {
+    const result = [];
     for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x].websiteId === websiteId) {  return this.pages[x]; }
+      if (this.pages[x].websiteId === websiteId) {  result.push(this.pages[x]); }
     }
+    return result;
   }
 
-  updatePage(pageId, page) {
+  updatePage(pageId: string, page: any) {
     const index = this.findPageIndexById(pageId);
     this.pages[index] = page;
   }
 
-  deletePage(pageId) {
+  deletePage(pageId: string) {
     const index = this.findPageIndexById(pageId);
     this.pages.splice(index, 1);
   }

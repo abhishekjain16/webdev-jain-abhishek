@@ -1,62 +1,68 @@
-<header>
-  <div class="row">
-    <div class="col-xs-1">
-      <a href="website-list.html" class="white"><span class="glyphicon glyphicon-chevron-left"></span></a>
+<form (ngSubmit) = "create()" #f="ngForm">
+  <header>
+    <div class="row">
+      <div class="col-xs-1">
+        <a [routerLink]="['/user', userId, 'website']" class="white"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      </div>
+      <div class="col-md-3 hidden-sm hidden-xs">
+        Websites
+        <a [routerLink]="['/user', userId, 'website', 'new']" class="white"><span class="pull-right glyphicon glyphicon-plus"></span></a>
+      </div>
+      <div class="col-xs-11 col-md-8">
+        New Website
+        <button type="submit"
+                class="pull-right white btn"
+                [disabled]="!f.valid"><span class="pull-right glyphicon glyphicon-check"></span></button>
+      </div>
     </div>
-    <div class="col-md-3 hidden-sm hidden-xs">
-      Websites
-      <a href="website-new.html" class="white"><span class="pull-right glyphicon glyphicon-plus"></span></a>
-    </div>
-    <div class="col-xs-11 col-md-8">
-      New Website
-      <a href="website-list.html" class="white"><span class="pull-right glyphicon glyphicon-check"></span></a>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 hidden-sm hidden-xs">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let website of websites">
+            <a [routerLink]="['/user', userId, 'website', website._id, 'page']">{{website.name}}</a>
+            <a class="pull-right" [routerLink]="['/user', userId, 'website', website._id]">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+        <div class="col-xs-12 col-md-8">
+          <label class="label"
+                 for="name">
+            Name
+          </label>
+          <input type="text"
+                 id="name"
+                 name="name"
+                 ngModel
+                 required
+                 #name="ngModel"
+                 class="form-control"
+                 placeholder="Name" />
+          <span class="help-block" *ngIf="!name.valid && name.touched">
+            Please enter Name!
+          </span>
+          <label for="description"
+                 class="label">
+            Description
+          </label>
+          <textarea class="form-control"
+                    id="description"
+                    rows="3"
+                    name="description"
+                    #description="ngModel"
+                    ngModel
+                    required
+                    placeholder="Description"></textarea>
+          <span class="help-block" *ngIf="!description.valid && description.touched">
+            Please enter description!
+          </span>
+        </div>
     </div>
   </div>
-</header>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 hidden-sm hidden-xs">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <a href="../page/page-list.html">Wikipedia</a>
-          <a class="pull-right" href="website-edit.html">
-            <span class="glyphicon glyphicon-edit"></span>
-          </a>
-        </li>
-        <li class="list-group-item">
-          <a href="../page/page-list.html">Twitter</a>
-          <a class="pull-right" href="website-edit.html">
-            <span class="glyphicon glyphicon-edit"></span>
-          </a>
-        </li>
-        <li class="list-group-item">
-          <a href="../page/page-list.html">Facebook</a>
-          <a class="pull-right" href="website-edit.html">
-            <span class="glyphicon glyphicon-edit"></span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-xs-12 col-md-8">
-      <label class="label"
-             for="name">
-        Name
-      </label>
-      <input type="text"
-             id="name"
-             class="form-control"
-             placeholder="Name" />
-      <label for="description"
-             class="label">
-        Description
-      </label>
-      <textarea class="form-control"
-                id="description"
-                rows="3"
-                placeholder="Description"></textarea>
-    </div>
-  </div>
-</div>
+</form>
 <footer>
   <a href="../user/profile.html" class="white">
     <span class="glyphicon glyphicon-user pull-right"></span>

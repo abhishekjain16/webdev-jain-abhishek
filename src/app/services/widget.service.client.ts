@@ -60,12 +60,12 @@ export class WidgetService {
     }
   }
 
-  updateWidget(widgetId, widget) {
+  updateWidget(widgetId: string, widget: any) {
     const index = this.findWidgetIndexById(widgetId);
     this.widgets[index] = widget;
   }
 
-  deleteWidget(widgetId) {
+  deleteWidget(widgetId: string) {
     const index = this.
     findWidgetIndexById(widgetId);
     this.widgets.splice(index, 1);

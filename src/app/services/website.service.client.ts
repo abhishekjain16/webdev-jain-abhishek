@@ -26,7 +26,7 @@ export class WebsiteService {
   api = {
     'createWebsite'   : this.createWebsite,
     'findWebsiteById' : this.findWebsiteById,
-    'findWebsiteByUser' : this.findWebsiteByUser,
+    'findWebsitesByUser' : this.findWebsitesByUser,
     'updateWebsite' : this.updateWebsite,
     'deleteWebsite' : this.deleteWebsite,
     'findWebsiteIndexById' : this.findWebsiteIndexById
@@ -51,18 +51,20 @@ export class WebsiteService {
     }
   }
 
-  findWebsiteByUser(userId: string) {
+  findWebsitesByUser(userId: string) {
+    const results = [];
     for (let x = 0; x < this.websites.length; x++) {
-      if (this.websites[x].developerId === userId) {  return this.websites[x]; }
+      if (this.websites[x].developerId === userId) {  results.push(this.websites[x]); }
     }
+    return results;
   }
 
-  updateWebsite(websiteId, website) {
+  updateWebsite(websiteId: string, website: any) {
     const index = this.findWebsiteIndexById(websiteId);
     this.websites[index] = website;
   }
 
-  deleteWebsite(websiteId) {
+  deleteWebsite(websiteId: string) {
     const index = this.findWebsiteIndexById(websiteId);
     this.websites.splice(index, 1);
   }
