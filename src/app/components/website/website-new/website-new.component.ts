@@ -14,7 +14,6 @@ export class WebsiteNewComponent implements OnInit {
   @ViewChild('f') websiteForm: NgForm;
   userId: string;
   websites = [{}];
-  user: any;
   name: string;
   description: string;
   website: any;
@@ -31,8 +30,13 @@ export class WebsiteNewComponent implements OnInit {
           this.userId = params['userId'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.websites = this.webService.findWebsitesByUser(this.userId);
+    this.webService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        }
+      );
+
   }
 
   create() {
@@ -42,8 +46,12 @@ export class WebsiteNewComponent implements OnInit {
       name: this.name,
       description: this.description
     }
-    this.website = this.webService.createWebsite(this.userId, website);
-    this.router.navigate(['user/' + this.userId, 'website']);
+    this.website = this.webService.createWebsite(this.userId, website)
+      .subscribe(
+        (new_website: any) => {
+          this.router.navigate(['user/' + this.userId, 'website']);
+        }
+      );
   }
 
 }

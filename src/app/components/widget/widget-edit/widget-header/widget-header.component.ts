@@ -16,6 +16,7 @@ export class WidgetHeaderComponent implements OnInit {
   pid: string;
   wgid: string;
   widget = {};
+  widgets = [{}];
 
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute) {
@@ -27,9 +28,14 @@ export class WidgetHeaderComponent implements OnInit {
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.wgid = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.wgid);
-      this.textHeader = this.widget['text'];
-      this.sizeHeader = this.widget['size'];
+      this.widgetService.findWidgetById(this.wgid)
+        .subscribe(
+          (widget: any) => {
+            this.widget = widget;
+            this.textHeader = widget['text'];
+            this.sizeHeader = widget['size'];
+          }
+        );
     });
   }
 
@@ -37,11 +43,21 @@ export class WidgetHeaderComponent implements OnInit {
     this.widget['widgetType'] = 'HEADING';
     this.widget['text'] = this.textHeader;
     this.widget['size'] = this.sizeHeader;
-    this.widgetService.updateWidget(this.wgid, this.widget);
+    this.widgetService.updateWidget(this.wgid, this.widget)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
   delete() {
-    this.widgetService.deleteWidget(this.wgid);
+    this.widgetService.deleteWidget(this.wgid)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
 }

@@ -30,8 +30,12 @@ export class WidgetListComponent implements OnInit {
           this.pid = params['pid'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pid);
+    this.widgetService.findWidgetsByPageId(this.pid)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
 }

@@ -12,6 +12,7 @@ export class WebsiteListComponent implements OnInit {
   userId : string;
   websites = [{}];
   user: any;
+  username: string;
 
   constructor(private webService: WebsiteService,
               private activatedRoute: ActivatedRoute,
@@ -24,8 +25,18 @@ export class WebsiteListComponent implements OnInit {
           this.userId = params['userId'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.websites = this.webService.findWebsitesByUser(this.userId);
+    this.userService.findUserById(this.userId)
+      .subscribe(
+        (user: any) => {
+          this.username = user.username;
+        }
+      );
+    this.webService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        }
+      );
   }
 
 }

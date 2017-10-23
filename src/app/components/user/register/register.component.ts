@@ -38,7 +38,15 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastName,
       email: this.email
     };
-    const savedUser = this.userService.createUser(user);
-    this.router.navigate(['user/' + savedUser._id]);
+
+    this.userService.createUser(user)
+      .subscribe(
+        (user: any) => {
+          this.errorFlag = false;
+          this.router.navigate(['user/' + user._id]);},
+        (error: any) => {
+          this.errorFlag = true;
+        }
+      );
   }
 }

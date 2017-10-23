@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   last_name: string;
   first_name: string;
   email: string;
+  errorFlag: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
 
@@ -27,11 +28,20 @@ export class ProfileComponent implements OnInit {
           this.userId = params['userId'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
-    this.last_name = this.user['lastName'];
-    this.first_name = this.user['firstName'];
-    this.email = this.user['email'];
+      this.userService.findUserById(this.userId)
+        .subscribe(
+          (user: any) => {
+            this.errorFlag = false;
+            this.username = user['username'];
+            this.last_name = user['lastName'];
+            this.first_name = user['firstName'];
+            this.email = user['email'];
+          },
+          (error: any) => {
+            this.errorFlag = true;
+          }
+        );
+
   }
 
   update() {
@@ -39,6 +49,18 @@ export class ProfileComponent implements OnInit {
     this.user["email"] = this.profileForm.value.email;
     this.user["firstName"] = this.profileForm.value.first_name;
     this.user["lastName"] = this.profileForm.value.last_name;
-    this.userService.updateUser(this.userId, this.user);
+    this.userService.updateUser(this.userId, this.user)
+      .subscribe(
+        (user: any) => {
+          this.errorFlag = false;
+          this.username = user['username'];
+          this.last_name = user['lastName'];
+          this.first_name = user['firstName'];
+          this.email = user['email'];
+        },
+        (error: any) => {
+          this.errorFlag = true;
+        }
+      );
   }
 }

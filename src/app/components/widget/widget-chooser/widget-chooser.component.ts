@@ -34,16 +34,20 @@ export class WidgetChooserComponent implements OnInit {
     const widget = {
       widgetType: type
     }
-    this.widget = this.widgetService.createWidget(this.pid, widget);
-    this.router.navigate([
-      'user/',
-      this.userId,
-      'website',
-      this.wid,
-      'page',
-      this.pid,
-      'widget',
-      this.widget._id]);
+    this.widget = this.widgetService.createWidget(this.pid, widget)
+      .subscribe(
+        (new_widget: any) => {
+          this.router.navigate([
+            'user/',
+            this.userId,
+            'website',
+            this.wid,
+            'page',
+            this.pid,
+            'widget',
+            new_widget._id]);
+        }
+      );
   }
 
 

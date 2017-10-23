@@ -11,7 +11,7 @@ import {PageService} from '../../../services/page.service.client';
 export class PageListComponent implements OnInit {
   userId : string;
   pages = [{}];
-  user: any;
+  username: string;
   wid: string;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -26,8 +26,18 @@ export class PageListComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.pages = this.pageService.findPageByWebsiteId(this.wid);
+    this.userService.findUserById(this.userId)
+      .subscribe(
+        (user: any) => {
+          this.username = user.username;
+        }
+      );
+    this.pageService.findPageByWebsiteId(this.wid)
+      .subscribe(
+        (pages: any) => {
+          this.pages = pages;
+        }
+      );
   }
 
 }

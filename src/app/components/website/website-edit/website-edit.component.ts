@@ -11,7 +11,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 })
 export class WebsiteEditComponent implements OnInit {
   @ViewChild('f') websiteEditForm: NgForm;
-  website: any;
+  website = {};
   userId: string;
   user: any;
   name: string;
@@ -32,23 +32,40 @@ export class WebsiteEditComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.website = this.webService.findWebsiteById(this.wid);
-    this.websites = this.webService.findWebsitesByUser(this.userId);
-    this.name = this.website.name;
-    this.description = this.website.description;
+    this.webService.findWebsiteById(this.wid)
+      .subscribe(
+        (website: any) => {
+          this.name = website.name;
+          this.description = website.description;
+        }
+      );
+
+    this.webService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        }
+      );
   }
 
   update() {
-    this.website["name"] = this.websiteEditForm.value.name;
-    this.website["description"] = this.websiteEditForm.value.description;
-    this.webService.updateWebsite(this.wid, this.website);
-    this.router.navigate(['user/' + this.userId, 'website']);
+    this.website['name'] = this.websiteEditForm.value.name;
+    this.website['description'] = this.websiteEditForm.value.description;
+    this.webService.updateWebsite(this.wid, this.website)
+      .subscribe(
+        (website: any) => {
+          this.router.navigate(['user/' + this.userId, 'website']);
+        }
+      );
   }
 
   delete() {
-    this.webService.deleteWebsite(this.wid);
-    this.router.navigate(['user/' + this.userId, 'website']);
+    this.webService.deleteWebsite(this.wid)
+      .subscribe(
+        (website: any) => {
+          this.router.navigate(['user/' + this.userId, 'website']);
+        }
+      );
   }
 
 }

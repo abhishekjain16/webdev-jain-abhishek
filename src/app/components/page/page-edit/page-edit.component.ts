@@ -12,7 +12,7 @@ import {PageService} from '../../../services/page.service.client';
 export class PageEditComponent implements OnInit {
   @ViewChild('f') pageEditForm: NgForm;
   userId: string;
-  page: any;
+  page = {};
   pages = [{}];
   name: string;
   description: string;
@@ -33,22 +33,39 @@ export class PageEditComponent implements OnInit {
           this.pid = params['pid'];
         }
       );
-    this.page = this.pageService.findPageById(this.pid);
-    this.pages = this.pageService.findPageByWebsiteId(this.wid);
-    this.name = this.page.name;
-    this.description = this.page.description;
+    this.pageService.findPageById(this.pid)
+      .subscribe(
+        (page: any) => {
+          this.name = page.name;
+          this.description = page.description;
+        }
+      );
+    this.pageService.findPageByWebsiteId(this.wid)
+      .subscribe(
+        (pages: any) => {
+          this.pages = pages;
+        }
+      );
   }
 
   update() {
-    this.page["name"] = this.pageEditForm.value.name;
-    this.page["description"] = this.pageEditForm.value.description;
-    this.pageService.updatePage(this.pid, this.page);
-    this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+    this.page['name'] = this.pageEditForm.value.name;
+    this.page['description'] = this.pageEditForm.value.description;
+    this.pageService.updatePage(this.pid, this.page)
+      .subscribe(
+        (page: any) => {
+          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+        }
+      );
   }
 
   delete() {
-    this.pageService.deletePage(this.pid);
-    this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+    this.pageService.deletePage(this.pid)
+      .subscribe(
+        (page: any) => {
+          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+        }
+      );
   }
 
 }

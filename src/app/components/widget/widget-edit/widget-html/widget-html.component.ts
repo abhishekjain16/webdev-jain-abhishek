@@ -15,6 +15,7 @@ export class WidgetHtmlComponent implements OnInit {
   pid: string;
   wgid: string;
   widget = {};
+  widgets = [{}];
 
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute) {
@@ -26,18 +27,33 @@ export class WidgetHtmlComponent implements OnInit {
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.wgid = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.wgid);
-      this.text = this.widget['text'];
+      this.widgetService.findWidgetById(this.wgid)
+        .subscribe(
+          (widget: any) => {
+            this.widget = widget;
+            this.text = widget['text'];
+          }
+        );
     });
   }
 
   update() {
     this.widget['widgetType'] = 'HTML';
     this.widget['text'] = this.text;
-    this.widgetService.updateWidget(this.wgid, this.widget);
+    this.widgetService.updateWidget(this.wgid, this.widget)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
   delete() {
-    this.widgetService.deleteWidget(this.wgid);
+    this.widgetService.deleteWidget(this.wgid)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 }
