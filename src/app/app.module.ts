@@ -28,7 +28,6 @@ import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
-import {SortableDirective} from '../../assignment/directives/sortable.directive';
 
 @NgModule({
   // Declare components here
@@ -51,8 +50,7 @@ import {SortableDirective} from '../../assignment/directives/sortable.directive'
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    WidgetHtmlComponent,
-    SortableDirective
+    WidgetHtmlComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import { DomSanitizer } from '@angular/platform-browser';
-import {SortableDirective} from '../../../../../assignment/directives/sortable.directive';
 
 @Component({
   selector: 'app-widget-list',

@@ -7,5 +7,6 @@
 
 export const environment = {
   production: false,
-  baseUrl : 'http://localhost:3000'
+  baseUrl : 'http://localhost:3000',
+  baseFrontUrl: 'http://localhost:4200'
 };
