@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
@@ -24,7 +24,8 @@ export class WidgetTextComponent implements OnInit {
   name: string;
 
   constructor(private widgetService: WidgetService,
-              private activatedRoutes: ActivatedRoute) { }
+              private activatedRoutes: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
@@ -56,7 +57,7 @@ export class WidgetTextComponent implements OnInit {
     this.widgetService.updateWidget(this.wgid, this.widget)
       .subscribe(
         (widgets: any) => {
-          this.widgets = widgets;
+          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }
@@ -65,7 +66,7 @@ export class WidgetTextComponent implements OnInit {
     this.widgetService.deleteWidget(this.wgid)
       .subscribe(
         (widgets: any) => {
-          this.widgets = widgets;
+          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

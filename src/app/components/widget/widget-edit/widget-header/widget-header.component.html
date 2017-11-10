@@ -7,7 +7,6 @@
   Edit Widget
 
   <a (click)="update()"
-     [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']"
      class="pull-right white">
     <span class="pull-right glyphicon glyphicon-check"></span>
   </a>
@@ -42,8 +41,7 @@
 
     <div class="form-group">
       <a (click)="delete()"
-         class="btn btn-danger btn-block "
-         [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']">
+         class="btn btn-danger btn-block ">
         Delete
       </a>
     </div>
