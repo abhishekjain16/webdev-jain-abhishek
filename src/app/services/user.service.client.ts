@@ -24,7 +24,6 @@ export class UserService {
   };
 
   createUser(user: any) {
-    user._id = Math.floor(Math.random() * 10000).toString();
     return this.http.post(this.baseUrl + '/api/user/', user)
       .map(
         (res: Response) => {

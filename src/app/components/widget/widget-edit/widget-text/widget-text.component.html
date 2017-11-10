@@ -1,0 +1,61 @@
+<header>
+  <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']"
+     class="white">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  Edit Widget
+  <a (click)="update()"
+     [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']"
+     class="pull-right white">
+    <span class="pull-right glyphicon glyphicon-check"></span>
+  </a>
+</header>
+<div class="container-fluid">
+  <form>
+    <div class="form-group">
+      <label>
+        Text
+      </label>
+      <input [(ngModel)]="text" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Rows
+      </label>
+      <input [(ngModel)]="rows" class="form-control" type="number"/>
+    </div>
+
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input [(ngModel)]="name"
+             type="text"
+             class="form-control"
+             id="Name"
+             name="name"
+             placeholder="Name">
+    </div>
+
+    <div class="form-group">
+      <label>Placeholder</label>
+      <input [(ngModel)]="placeholder" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text"
+             readonly
+             value="Formatted"
+             class="form-control"/>
+      <span class="input-group-addon">
+         <input [(ngModel)]="formatted"
+                type="checkbox"/>
+     </span>
+    </div>
+  </form>
+</div>
+<footer>
+  <a [routerLink]="['/user', userId]"
+     class="white">
+    <span class="glyphicon glyphicon-user pull-right"></span>
+  </a>
+</footer>

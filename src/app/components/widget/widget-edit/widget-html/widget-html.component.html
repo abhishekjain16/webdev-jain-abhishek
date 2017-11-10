@@ -14,16 +14,10 @@
 <div class="container-fluid">
   <form>
     <div class="form-group">
-      <label for="textHeader">
+      <label>
         Text
       </label>
-      <input [(ngModel)]="text"
-             name="textHeader"
-             required
-             type="text"
-             class="form-control"
-             id="textHeader"
-             placeholder="Home Page">
+      <quill-editor [(ngModel)]="text" name="text"></quill-editor>
     </div>
     <div class="form-group">
       <a (click)="delete()"

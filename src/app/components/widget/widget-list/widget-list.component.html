@@ -43,7 +43,7 @@
         <img class="content" src={{widget.url}} [style.width]="widget.width" />
       </div>
 
-      <div *ngSwitchCase="'YOUTUBE'">
+      <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
         <div class="widget-settings">
           <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget', widget._id]">
             <span class="glyphicon glyphicon-cog"></span>
@@ -51,7 +51,6 @@
           <span class="glyphicon glyphicon-list"></span>
         </div>
         <iframe class="content"
-                height="415"
                 [style.width]="widget.width"
                 [src]="sanitizer.bypassSecurityTrustResourceUrl(widget.url)"
                 frameborder="0"

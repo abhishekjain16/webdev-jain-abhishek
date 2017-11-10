@@ -22,7 +22,6 @@ export class PageService {
   };
 
   createPage(websiteId: string, page: any) {
-    page._id = Math.floor(Math.random() * 10000).toString();
     page.websiteId = websiteId;
     return this.http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page)
       .map(

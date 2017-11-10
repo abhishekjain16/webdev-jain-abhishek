@@ -27,7 +27,7 @@ module.exports = function(app)
         message: String
     });
 
-    var TestModel = mongoose.model("TestModel", TestSchema);
+    var TestModel = mongoose.model("TestModeling", TestSchema);
 
     function findAllMessages(req, res) {
 
