@@ -36,7 +36,7 @@
 
   <a [routerLink]="['/user', userId, 'website']" class="btn btn-primary btn-block">Websites</a>
 
-  <a [routerLink]= "['/login']" class="btn btn-danger btn-block">Logout</a>
+  <a (click)="logout()" class="btn btn-danger btn-block">Logout</a>
 </div>
 </form>
 <footer>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   password: string;
   errorFlag: boolean;
   errorMsg = 'Invalid Username/Password !';
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router,
+              private userService: UserService,
+              private sharedService: SharedService) { }
 
   ngOnInit() {
   }
@@ -23,15 +26,23 @@ export class LoginComponent implements OnInit {
   login() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    this.userService.findUserByCredentials(this.username, this.password)
+    this.userService.login(this.username, this.password)
       .subscribe(
-        (user: any) => {
-          this.errorFlag = false;
-          this.router.navigate(['user/' + user._id]); },
+        (data: any) => {
+          this.sharedService.user = data;
+          this.router.navigate(['/user', data._id])},
         (error: any) => {
-          this.errorFlag = true;
+          console.log(error);
         }
       );
   }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => this.router.navigate(['/login'])
+      );
+  }
+
 
 }

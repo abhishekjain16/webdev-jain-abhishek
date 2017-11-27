@@ -28,6 +28,8 @@ import { UserService } from './services/user.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
+import {SharedService} from './services/shared.service';
+import {AuthGuard} from './services/auth-guard.service';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 
@@ -63,7 +65,7 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     QuillEditorModule
   ],
   // Client Side services here
-  providers: [ TestService, UserService, WebsiteService, PageService, WidgetService],
+  providers: [ TestService, UserService, WebsiteService, PageService, WidgetService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

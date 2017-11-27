@@ -10,6 +10,7 @@ UserModel.createUser = createUser;
 UserModel.findAllUsers = findAllUsers;
 UserModel.deleteUser = deleteUser;
 UserModel.updateUser = updateUser;
+UserModel.findUserByFacebookId = findUserByFacebookId;
 
 module.exports = UserModel;
 
@@ -41,3 +42,8 @@ function deleteUser(id) {
 function updateUser(id, user) {
   return UserModel.update({_id: id}, user);
 }
+
+function findUserByFacebookId(facebookId) {
+  return UserModel.findOne({'facebook.id': facebookId});
+}
+

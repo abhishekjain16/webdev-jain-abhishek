@@ -19,7 +19,9 @@ export class ProfileComponent implements OnInit {
   email: string;
   errorFlag: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -61,6 +63,13 @@ export class ProfileComponent implements OnInit {
         (error: any) => {
           this.errorFlag = true;
         }
+      );
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => this.router.navigate(['/login'])
       );
   }
 }
