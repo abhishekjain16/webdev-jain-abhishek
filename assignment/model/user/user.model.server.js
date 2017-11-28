@@ -11,6 +11,7 @@ UserModel.findAllUsers = findAllUsers;
 UserModel.deleteUser = deleteUser;
 UserModel.updateUser = updateUser;
 UserModel.findUserByFacebookId = findUserByFacebookId;
+UserModel.findUserByUsername = findUserByUsername;
 
 module.exports = UserModel;
 

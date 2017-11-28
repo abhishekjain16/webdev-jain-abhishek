@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           this.sharedService.user = data;
           this.router.navigate(['/user', data._id])},
         (error: any) => {
-          console.log(error);
+          this.errorFlag = true;
         }
       );
   }

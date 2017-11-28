@@ -28,7 +28,7 @@ export class UserService {
   };
 
   createUser(user: any) {
-    this.options.withCredentials = false;
+    this.options.withCredentials = true;
     return this.http.post(this.baseUrl + '/api/user/', user, this.options)
       .map(
         (res: Response) => {
@@ -90,7 +90,7 @@ export class UserService {
 
   login(username: string, password: string) {
 
-    this.options.withCredentials = false;
+    this.options.withCredentials = true;
 
     const body = {
       username : username,
@@ -116,7 +116,7 @@ export class UserService {
   }
 
   loggedIn() {
-    this.options.withCredentials = false;
+    this.options.withCredentials = true;
     return this.http.post(this.baseUrl + '/api/loggedin', '', this.options)
       .map(
         (res: Response) => {

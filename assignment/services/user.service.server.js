@@ -73,6 +73,7 @@ module.exports = function (app) {
     UserModel.createUser(user)
       .then(function (user) {
         if (user) {
+          console.log(user);
           req.login(user, function(err) {
             if(err) {
               res.status(400).send(err);
@@ -138,31 +139,25 @@ module.exports = function (app) {
 
   function localStrategy(username, password, done) {
     UserModel
-      .findUserByCredentials(username, password)
+      .findUserByUsername(username)
       .then(
         function(user) {
-          if(user.username === username && user.password === password) {
+          if(user && bcrypt.compareSync(password, user.password)) {
             return done(null, user);
           } else {
             return done(null, false);
           }
         },
         function(err) {
-          if (err) { return done(err); }
+          if (err) {
+            return done(err);
+          }
         }
       );
   }
 
   function login(req, res) {
     var user = req.user;
-    var password = req.body.password;
-    console.log(user);
-
-    if(user && bcrypt.compareSync(password, user.password)) {
-      return done(null, user);
-    } else {
-      return done(null, false);
-    }
     res.json(user);
   }
 
