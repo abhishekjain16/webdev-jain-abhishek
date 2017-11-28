@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (newUser: any) => {
           this.errorFlag = false;
-          this.router.navigate(['user/' + newUser._id]);},
+          this.router.navigate(['/profile']);},
         (error: any) => {
           this.errorFlag = true;
         }

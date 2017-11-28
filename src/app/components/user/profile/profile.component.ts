@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -19,30 +20,40 @@ export class ProfileComponent implements OnInit {
   email: string;
   errorFlag: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private sharedService: SharedService,
               private userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(
-        (params: any) => {
-          this.userId = params['userId'];
-        }
-      );
-      this.userService.findUserById(this.userId)
-        .subscribe(
-          (user: any) => {
-            this.errorFlag = false;
-            this.username = user['username'];
-            this.last_name = user['lastName'];
-            this.first_name = user['firstName'];
-            this.email = user['email'];
-          },
-          (error: any) => {
-            this.errorFlag = true;
-          }
-        );
+    // this.activatedRoute.params
+    //   .subscribe(
+    //     (params: any) => {
+    //       this.userId = params['userId'];
+    //     }
+    //   );
+      this.user = this.sharedService.user;
+      if (this.user) {
+        this.errorFlag = false;
+        this.username = this.user['username'];
+        this.last_name = this.user['lastName'];
+        this.first_name = this.user['firstName'];
+        this.email = this.user['email'];
+      } else {
+        this.errorFlag = true;
+      }
+      // this.userService.findUserById(this.userId)
+      //   .subscribe(
+      //     (user: any) => {
+      //       this.errorFlag = false;
+      //       this.username = user['username'];
+      //       this.last_name = user['lastName'];
+      //       this.first_name = user['firstName'];
+      //       this.email = user['email'];
+      //     },
+      //     (error: any) => {
+      //       this.errorFlag = true;
+      //     }
+      //   );
 
   }
 

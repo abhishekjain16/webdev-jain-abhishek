@@ -7,6 +7,7 @@ module.exports = function (app) {
   var LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
   var bcrypt = require("bcrypt-nodejs");
+  var FacebookStrategy = require('passport-facebook').Strategy;
 
 
   app.get('/api/user', findUsers);
@@ -33,7 +34,34 @@ module.exports = function (app) {
   function facebookStrategy(token, refreshToken, profile, done) {
     UserModel
       .findUserByFacebookId(profile.id)
+        .then(function (user) {
+          if (user) {
+            req.login(user, function(err) {
+              if(err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          } else {
+            UserModel.createUser(profile)
+              .then(function (user) {
+                if (user) {
+                  req.login(user, function(err) {
+                    if(err) {
+                      res.status(400).send(err);
+                    } else {
+                      res.json(user);
+                    }
+                  });
+                } else {
+                  res.status(400).send(err);
+                }
+              })
+          }
+        })
   }
+
 
 
   function findUsers(req, res) {
@@ -73,7 +101,6 @@ module.exports = function (app) {
     UserModel.createUser(user)
       .then(function (user) {
         if (user) {
-          console.log(user);
           req.login(user, function(err) {
             if(err) {
               res.status(400).send(err);

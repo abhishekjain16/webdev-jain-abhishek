@@ -28,7 +28,7 @@ if (process.env.FACEBOOK_CLIENT_ID) {
   var facebookConfig = {
     clientID     : '382552615534382',
     clientSecret : '0353493dfdbfdc9912a64837b593bc82',
-    callbackURL  : 'http://jain-abhishek-webdev.herokuapp.com/'
+    callbackURL  : 'http://localhost:3000/auth/facebook/callback'
   };
 }
 var sessionSecret = "";
