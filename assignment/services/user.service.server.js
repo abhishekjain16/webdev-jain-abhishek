@@ -41,8 +41,8 @@ module.exports = function (app) {
   app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: 'http://localhost:4200/profile',
-      failureRedirect: 'http://localhost:4200/login'
+      successRedirect: 'https://jain-abhishek-webdev.herokuapp.com/profile',
+      failureRedirect: 'https://jain-abhishek-webdev.herokuapp.com/login'
     }));
   // app.get('/auth/facebook', )
 
