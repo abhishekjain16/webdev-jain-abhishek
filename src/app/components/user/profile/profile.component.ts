@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
         this.last_name = this.user['lastName'];
         this.first_name = this.user['firstName'];
         this.email = this.user['email'];
+        this.userId = this.user['_id'];
       } else {
         this.errorFlag = true;
       }

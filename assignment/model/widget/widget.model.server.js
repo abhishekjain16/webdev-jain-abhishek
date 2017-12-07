@@ -9,10 +9,15 @@ WidgetModel.createWidget = createWidget;
 WidgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
 WidgetModel.deleteWidget = deleteWidget;
 WidgetModel.updateWidget = updateWidget;
-WidgetModel.reorderWidget = reorderWidget;
+WidgetModel.reorderWidgets = reorderWidgets;
+WidgetModel.findLastPositionedWidget = findLastPositionedWidget;
 
 module.exports = WidgetModel;
 
+
+function findLastPositionedWidget(pageId) {
+  return WidgetModel.findOne({_page: pageId}, {sort: {position: -1}});
+}
 
 function findWidgetById(id) {
   return WidgetModel.findOne({_id: id});
@@ -24,7 +29,7 @@ function createWidget(pageId, widget) {
 }
 
 function findAllWidgetsForPage(pageId) {
-  return WidgetModel.find({_page: pageId});
+  return WidgetModel.find({_page: pageId}).sort({position: 1});
 }
 
 function deleteWidget(id) {
@@ -35,6 +40,45 @@ function updateWidget(id, widget) {
   return WidgetModel.update({_id: id}, widget);
 }
 
-function reorderWidget(pageId, start, end) {
-  return WidgetModel.update({_page: pageId, position: start}, {position: end});
+function reorderWidgets(pageId, startIndex, endIndex) {
+  return WidgetModel.find({_page:pageId}, function (err, widgets) {
+    widgets.forEach (function (widget) {
+      if (widget.position == startIndex) {
+        widget.position = endIndex;
+        widget.save();
+      } else if (endIndex > startIndex) {
+        if (widget.position >= startIndex && widget.position <= endIndex) {
+          widget.position = widget.position - 1;
+          widget.save();
+        }
+      } else if (startIndex > endIndex) {
+        if (widget.position >= endIndex && widget.position <= startIndex) {
+          widget.position = widget.position + 1;
+          widget.save();
+        }
+      }
+      // if(startIndex < endIndex){
+      //   if(widget.position === startIndex){
+      //     widget.position = endIndex;
+      //     widget.save();
+      //   } else if (widget.position > startIndex
+      //     && widget.position <= endIndex){
+      //     widget.position --;
+      //     widget.save();
+      //   }
+      // }
+      // else {
+      //   console.log(widget.position);
+      //   console.log(startIndex);
+      //   if(widget.position === startIndex){
+      //     widget.position = endIndex;
+      //     widget.save();
+      //   } else if(widget.position < startIndex
+      //     && widget.position >= endIndex){
+      //     widget.position ++;
+      //     widget.save();
+      //   }
+      // }
+    })
+  })
 }

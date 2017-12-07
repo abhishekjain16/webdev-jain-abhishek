@@ -1,4 +1,23 @@
 module.exports = function (app) {
+  var facebookConfig = {};
+  // if (process.env.FACEBOOK_CLIENT_ID) {
+  //   facebookConfig = {
+  //     clientID     : process.env.FACEBOOK_CLIENT_ID,
+  //     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+  //     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+  //   };
+  // } else {
+  //   facebookConfig = {
+  //     clientID     : '382552615534382',
+  //     clientSecret : '0353493dfdbfdc9912a64837b593bc82',
+  //     callbackURL  : 'http://localhost:3000/auth/facebook/callback'
+  //   };
+  // }
+  facebookConfig = {
+    clientID     : '382552615534382',
+    clientSecret : '0353493dfdbfdc9912a64837b593bc82',
+    callbackURL  : 'https://jain-abhishek-webdev.herokuapp.com/auth/facebook/callback'
+  };
 
   var UserModel = require('../model/user/user.model.server');
   var passport = require('passport');
@@ -8,6 +27,7 @@ module.exports = function (app) {
   passport.use(new LocalStrategy(localStrategy));
   var bcrypt = require("bcrypt-nodejs");
   var FacebookStrategy = require('passport-facebook').Strategy;
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
   app.get('/api/user', findUsers);
@@ -18,12 +38,13 @@ module.exports = function (app) {
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/logout', logout);
   app.post('/api/loggedin', loggedin);
-  app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
+  app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/profile',
-      failureRedirect: '/login'
+      successRedirect: 'http://localhost:4200/profile',
+      failureRedirect: 'http://localhost:4200/login'
     }));
+  // app.get('/auth/facebook', )
 
   // var users = [{_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder', email: 'alice@alice.com'},
   //   {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley', email: 'bob@gmail.com'},
@@ -36,27 +57,20 @@ module.exports = function (app) {
       .findUserByFacebookId(profile.id)
         .then(function (user) {
           if (user) {
-            req.login(user, function(err) {
-              if(err) {
-                res.status(400).send(err);
-              } else {
-                res.json(user);
-              }
-            });
+            return done(null, user);
           } else {
-            UserModel.createUser(profile)
+            const user = {
+              firstName: profile.name['givenName'],
+              lastName: profile.name['familyName'],
+              username: profile.username,
+              facebook: {
+                id: profile.id,
+                token: token
+              }
+            }
+            UserModel.createUser(user)
               .then(function (user) {
-                if (user) {
-                  req.login(user, function(err) {
-                    if(err) {
-                      res.status(400).send(err);
-                    } else {
-                      res.json(user);
-                    }
-                  });
-                } else {
-                  res.status(400).send(err);
-                }
+                return done(null, user);
               })
           }
         })

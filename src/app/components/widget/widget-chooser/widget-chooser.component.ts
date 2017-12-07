@@ -13,6 +13,7 @@ export class WidgetChooserComponent implements OnInit {
   userId: string;
   widget: any;
   wid: string;
+  size: number;
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
@@ -28,11 +29,18 @@ export class WidgetChooserComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
+    this.widgetService.findWidgetsByPageId(this.pid)
+      .subscribe(
+        (widgets: any) => {
+          this.size = widgets.length;
+        }
+      );
   }
 
   create(type) {
     const widget = {
-      widgetType: type
+      widgetType: type,
+      position: this.size
     }
     this.widget = this.widgetService.createWidget(this.pid, widget)
       .subscribe(

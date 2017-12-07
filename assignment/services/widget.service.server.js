@@ -75,6 +75,15 @@ module.exports = function (app) {
   function sortWidgets(req, res) {
     var initial = req.query['initial'];
     var final = req.query['final'];
+    var pageId = req.params['pageId'];
+    WidgetModel
+      .reorderWidgets(pageId, initial, final)
+      .then(function (stats) {
+        res.send(200);
+
+      }, function (err) {
+        res.sendStatus(400).send(err);
+      });
   }
 
   function uploadImage(req, res) {
@@ -93,12 +102,19 @@ module.exports = function (app) {
     var destination   = myFile.destination;  // folder where file is saved to
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
+    var newWidget = {
+      url: '/assets/uploads/'+filename,
+      width: width
+    }
 
-    widget = getWidgetById(widgetId);
-    widget.url = '/assets/uploads/'+filename;
-    widget.width = width;
+    WidgetModel.updateWidget(widgetId, newWidget)
+      .then(function (status) {
+        res.json(status);
+      });
 
-    var callbackUrl   =  "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget" ;
+
+    // var callbackUrl   =  "http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget" ;
+    var callbackUrl   =  "https://jain-abhishek-webdev.herokuapp.com//user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget" ;
 
     res.redirect(callbackUrl);
   }

@@ -10,19 +10,12 @@
   </a>
 </header>
 <div class="container-fluid">
-  <form>
+  <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="url">
-        URL
+      <label>
+        Upload Image
       </label>
-      <input [(ngModel)]="url"
-             name="url"
-             required
-             type="url"
-             required
-             class="form-control"
-             id="url"
-             placeholder="http://image.com/image.jpeg">
+      <input name="myFile" type="file" class="form-control"/>
     </div>
     <div class="form-group">
       <label for="width">
@@ -37,9 +30,19 @@
              id="width"
              placeholder="100%">
     </div>
+    <input  name="widgetId" value="{{wgid}}"   style="display: none"/>
+    <input  name="websiteId" value="{{wid}}"   style="display: none"/>
+    <input  name="pageId" value="{{pid}}"   style="display: none"/>
+    <input  name="userId" value="{{userId}}"   style="display: none"/>
+    <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+    <br/>
     <div class="form-group">
+      <a class="btn btn-primary btn-block "
+         [routerLink]="['/user/'+ userId +'/website/'+wid+'/page/'+pid+'/widget/'+wgid+'/flickr']" >Flickr
+      </a>
       <a (click)="delete()"
-         class="btn btn-danger btn-block ">
+         class="btn btn-danger btn-block "
+         [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']">
         Delete
       </a>
     </div>

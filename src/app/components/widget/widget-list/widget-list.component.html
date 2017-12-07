@@ -9,7 +9,7 @@
     <span class="pull-right glyphicon glyphicon-plus"></span>
   </a>
 </header>
-<div class="container-fluid">
+<div class="container-fluid" appSortable (newIndexes)="reorderWidgets($event)">
   <div class="aj-widget" *ngFor="let widget of widgets">
     <div [ngSwitch]="widget.widgetType">
 
@@ -59,7 +59,8 @@
           </a>
           <span class="glyphicon glyphicon-list"></span>
         </div>
-        <img class="content" src={{widget.url}} [style.width]="widget.width" />
+        <img [src] = "widget.url" [style.width]="widget.width" />
+        <!--<img class="content" src={{widget.url}} [style.width]="widget.width" />-->
       </div>
 
       <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
