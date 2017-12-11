@@ -121,6 +121,7 @@ h1, h3{
   border-bottom: 4px double rgba(247, 197, 106, 0.35);
   padding-bottom: 0.2em;
   margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .h-container p {
