@@ -80,3 +80,49 @@ footer {
 .aj-widget .content {
   width: 100%;
 }
+
+.home {
+  background-image: url("../images/library.jpg");
+  padding-top: 30px;
+  height: 570px;
+  background-color: #333;
+  background-size: cover;
+  background-position: 50%;
+}
+
+
+.self {
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  margin: 0 10px;
+  /*float: left;*/
+  position: relative;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 0 3px rgba(4,4,4,0.3);
+  float: none;
+}
+
+.main-image {
+  text-align: center;
+}
+
+h1, h3{
+  color: #ffffff;
+  font-size: xx-large;
+  font-weight: 800;
+}
+
+.about {
+  font-size: 4em;
+  text-align: center;
+  color: #008B8B;
+  border-bottom: 4px double rgba(247, 197, 106, 0.35);
+  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+}
+
+.h-container p {
+  color: #999;
+}
