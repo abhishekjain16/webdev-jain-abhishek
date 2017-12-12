@@ -104,6 +104,18 @@ footer {
   float: none;
 }
 
+.self-small {
+  border-radius: 5px;
+  margin: 0 10px;
+  /*float: left;*/
+  position: relative;
+  overflow: hidden;
+  border: 10px solid #fff;
+  box-shadow: 0 0 3px rgba(4,4,4,0.3);
+  float: none;
+}
+
+
 .main-image {
   text-align: center;
 }
@@ -117,8 +129,8 @@ h1, h3{
 .about {
   font-size: 4em;
   text-align: center;
-  color: #008B8B;
-  border-bottom: 4px double rgba(247, 197, 106, 0.35);
+  color: #004165;
+  border-bottom: 4px double rgba(171, 131, 59, 0.45);
   padding-bottom: 0.2em;
   margin-bottom: 1em;
   margin-top: 1em;
